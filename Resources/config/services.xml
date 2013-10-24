@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="ruudk_payment_adyen.controller.notification.class">Ruudk\Payment\AdyenBundle\Controller\NotificationController</parameter>
+        <parameter key="ruudk_payment_adyen.adyen.api.class">Ruudk\Payment\AdyenBundle\Adyen\Api</parameter>
+        <parameter key="ruudk_payment_adyen.plugin.default.class">Ruudk\Payment\AdyenBundle\Plugin\DefaultPlugin</parameter>
+        <parameter key="ruudk_payment_adyen.plugin.ideal.class">Ruudk\Payment\AdyenBundle\Plugin\IdealPlugin</parameter>
+        <parameter key="ruudk_payment_adyen.form.adyen_type.class">Ruudk\Payment\AdyenBundle\Form\AdyenType</parameter>
+        <parameter key="ruudk_payment_adyen.form.ideal_type.class">Ruudk\Payment\AdyenBundle\Form\IdealType</parameter>
+        <parameter key="ruudk_payment_adyen.cache_warmer.ideal.class">Ruudk\Payment\AdyenBundle\CacheWarmer\IdealCacheWarmer</parameter>
+    </parameters>
+
+    <services>
+        <service id="ruudk_payment_adyen.cache_warmer.ideal" class="%ruudk_payment_adyen.cache_warmer.ideal.class%">
+            <argument type="service" id="ruudk_payment_adyen.api" />
+            <tag name="kernel.cache_warmer" />
+        </service>
+
+        <service id="ruudk_payment_adyen.controller.notification" class="%ruudk_payment_adyen.controller.notification.class%">
+            <argument type="service" id="payment.plugin_controller" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <call method="setLogger">
+                <argument type="service" id="monolog.logger.ruudk_payment_adyen" />
+            </call>
+        </service>
+
+        <service id="ruudk_payment_adyen.api" class="%ruudk_payment_adyen.adyen.api.class%">
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
+
+        <service id="ruudk_payment_adyen.plugin.default" class="%ruudk_payment_adyen.plugin.default.class%">
+            <argument type="service" id="ruudk_payment_adyen.api" />
+            <call method="setLogger">
+                <argument type="service" id="monolog.logger.ruudk_payment_adyen" />
+            </call>
+            <tag name="payment.plugin" />
+        </service>
+
+        <service id="ruudk_payment_adyen.plugin.ideal" class="%ruudk_payment_adyen.plugin.ideal.class%">
+            <argument type="service" id="ruudk_payment_adyen.api" />
+            <call method="setLogger">
+                <argument type="service" id="monolog.logger.ruudk_payment_adyen" />
+            </call>
+            <tag name="payment.plugin" />
+        </service>
+
+        <service id="monolog.logger.ruudk_payment_adyen" parent="monolog.logger_prototype">
+            <argument index="0">ruudk_payment_adyen</argument>
+        </service>
+    </services>
+</container>
