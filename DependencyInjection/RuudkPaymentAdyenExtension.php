@@ -27,7 +27,8 @@ class RuudkPaymentAdyenExtension extends Extension
             $config['merchant_account'],
             $config['skin_code'],
             $config['secret_key'],
-            $config['test']
+            $config['test'],
+            $config['timeout']
         ));
 
         foreach($config['methods'] AS $method) {
