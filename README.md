@@ -45,8 +45,9 @@ ruudk_payment_adyen:
     merchant_account:  Your merchant account
     skin_code:         Your skin code
     secret_key:        Your secret key
-    test:              true/false   # Default true
-    logger:            true/false   # Default true
+    test:              true/false             # Default true
+    logger:            true/false             # Default true
+    timeout:           the timeout in seconds # Default 5
     methods:
         - ideal
         - mister_cash

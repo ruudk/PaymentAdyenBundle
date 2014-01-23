@@ -17,19 +17,22 @@ class Api
     private $skinCode;
     private $secretKey;
     private $host;
+    private $timeout;
 
     /**
      * @param string  $merchantAccount
      * @param string  $skinCode
      * @param string  $secretKey
      * @param boolean $test
+     * @param integer $timeout
      */
-    public function __construct($merchantAccount, $skinCode, $secretKey, $test)
+    public function __construct($merchantAccount, $skinCode, $secretKey, $test, $timeout)
     {
         $this->merchantAccount = $merchantAccount;
         $this->skinCode = $skinCode;
         $this->secretKey = $secretKey;
         $this->host = sprintf('https://%s.adyen.com', $test ? 'test' : 'live');
+        $this->timeout = $timeout;
     }
 
     public function setRequest(Request $request = null)
@@ -46,7 +49,7 @@ class Api
         $response = new Buzz\Message\Response();
 
         $client = new Buzz\Client\Curl();
-        $client->setTimeout(5);
+        $client->setTimeout($this->timeout);
         $client->send($request, $response);
 
         if($response->getStatusCode() !== 200) {

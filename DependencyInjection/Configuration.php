@@ -35,6 +35,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('logger')
                     ->defaultTrue()
                 ->end()
+                ->integerNode('timeout')
+                    ->defaultValue(5)
+                ->end()
             ->end()
 
             ->fixXmlConfig('method')
