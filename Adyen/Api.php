@@ -59,7 +59,7 @@ class Api
         $banks = array();
         $xml = new \SimpleXMLElement($response->getContent());
         foreach($xml->bank as $bank) {
-            $banks[(int) $bank->bank_id] = (string) $bank->bank_name;
+            $banks[(string) $bank->bank_id] = (string) $bank->bank_name;
         }
 
         return $banks;
