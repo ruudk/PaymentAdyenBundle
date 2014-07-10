@@ -24,7 +24,7 @@ class IdealPlugin extends DefaultPlugin
          */
         $data = $instruction->getExtendedData();
         if(!$data->get('bank')) {
-            $errorBuilder->addDataError('bank', 'form.error.bank_required');
+            $errorBuilder->addDataError('data_adyen_ideal.bank', 'form.error.bank_required');
         }
 
         if ($errorBuilder->hasErrors()) {
