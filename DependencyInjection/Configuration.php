@@ -38,6 +38,9 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('timeout')
                     ->defaultValue(5)
                 ->end()
+                ->scalarNode('shopper_locale')
+                    ->defaultValue(null)
+                ->end()
             ->end()
 
             ->fixXmlConfig('method')

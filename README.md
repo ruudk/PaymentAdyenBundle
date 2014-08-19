@@ -45,9 +45,10 @@ ruudk_payment_adyen:
     merchant_account:  Your merchant account
     skin_code:         Your skin code
     secret_key:        Your secret key
-    test:              true/false             # Default true
-    logger:            true/false             # Default true
-    timeout:           the timeout in seconds # Default 5
+    test:              true/false                  # Default true
+    logger:            true/false                  # Default true
+    timeout:           the timeout in seconds      # Default 5
+    shopper_locale:    the locale Adyen should use # Default null
     methods:
         - ideal
         - mister_cash
