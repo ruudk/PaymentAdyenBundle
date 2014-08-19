@@ -18,21 +18,24 @@ class Api
     private $secretKey;
     private $host;
     private $timeout;
+    private $shopperLocale;
 
     /**
-     * @param string  $merchantAccount
-     * @param string  $skinCode
-     * @param string  $secretKey
-     * @param boolean $test
-     * @param integer $timeout
+     * @param string      $merchantAccount
+     * @param string      $skinCode
+     * @param string      $secretKey
+     * @param boolean     $test
+     * @param integer     $timeout
+     * @param string|null $shopperLocale
      */
-    public function __construct($merchantAccount, $skinCode, $secretKey, $test, $timeout)
+    public function __construct($merchantAccount, $skinCode, $secretKey, $test, $timeout, $shopperLocale)
     {
         $this->merchantAccount = $merchantAccount;
         $this->skinCode = $skinCode;
         $this->secretKey = $secretKey;
         $this->host = sprintf('https://%s.adyen.com', $test ? 'test' : 'live');
         $this->timeout = $timeout;
+        $this->shopperLocale = $shopperLocale;
     }
 
     public function setRequest(Request $request = null)
@@ -97,6 +100,10 @@ class Api
         $parameters['idealIssuerId']     = $bank;
         $parameters['resURL']            = $returnUrl;
         $parameters['merchantSig']       = $this->signRequest($parameters);
+
+        if ($this->shopperLocale !== null) {
+            $parameters['shopperLocale'] = $this->shopperLocale;
+        }
 
         return sprintf('%s/hpp/redirectIdeal.shtml?%s',
             $this->host,
