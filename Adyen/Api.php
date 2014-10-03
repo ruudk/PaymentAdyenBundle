@@ -90,11 +90,11 @@ class Api
         $parameters = array();
         $parameters['paymentAmount']     = $amount * 100;
         $parameters['currencyCode']      = $currency;
-        $parameters['shipBeforeDate']    = (new \DateTime('+1 hour'))->format('Y-m-d');
+        $parameters['shipBeforeDate']    = date('Y-m-d', strtotime('+1 hour'));
         $parameters['merchantReference'] = $id;
         $parameters['skinCode']          = $this->skinCode;
         $parameters['merchantAccount']   = $this->merchantAccount;
-        $parameters['sessionValidity']   = (new \DateTime('+1 hour'))->format(DATE_ATOM);
+        $parameters['sessionValidity']   = date(DATE_ATOM, strtotime('+1 hour'));
         $parameters['skipSelection']     = 'true';
         $parameters['brandCode']         = 'ideal';
         $parameters['idealIssuerId']     = $bank;
@@ -124,11 +124,11 @@ class Api
         $parameters = array();
         $parameters['paymentAmount']       = $amount * 100;
         $parameters['currencyCode']        = $currency;
-        $parameters['shipBeforeDate']      = (new \DateTime('+1 hour'))->format('Y-m-d');
+        $parameters['shipBeforeDate']      = date('Y-m-d', strtotime('+1 hour'));
         $parameters['merchantReference']   = $id;
         $parameters['skinCode']            = $this->skinCode;
         $parameters['merchantAccount']     = $this->merchantAccount;
-        $parameters['sessionValidity']     = (new \DateTime('+1 hour'))->format(DATE_ATOM);
+        $parameters['sessionValidity']     = date(DATE_ATOM, strtotime('+1 hour'));
         $parameters['shopperReference']    = '1';
         $parameters['recurringContract']   = null;
         $parameters['allowedMethods']      = null;
