@@ -4,7 +4,7 @@
     "description": "A Symfony2 Bundle that provides access to the Adyen API. Based on JMSPaymentCoreBundle.",
     "keywords": ["payment", "adyen"],
     "homepage": "https://github.com/ruudk/PaymentAdyenBundle",
-    "license": "Apache2",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ruud Kamphuis",
