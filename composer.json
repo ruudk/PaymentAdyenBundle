@@ -18,7 +18,6 @@
         "kriswallsmith/buzz": ">=0.7"
     },
     "autoload": {
-        "psr-0": { "Ruudk\\Payment\\AdyenBundle": "" }
-    },
-    "target-dir": "Ruudk/Payment/AdyenBundle"
+        "psr-4": { "Ruudk\\Payment\\AdyenBundle\\": "src" }
+    }
 }
